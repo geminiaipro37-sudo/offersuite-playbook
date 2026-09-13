@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OfferSuite™ — Career Operating Playbook</title>
+  <style>
+    /* Brand Palette & Base Reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #0B1320;
+      color: #F8FAFC;
+    }
+
+    /* Sticky Navigation */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(11, 19, 32, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2.5rem;
+      border-bottom: 1px solid #1E2E48;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.5px;
+      color: #FFFFFF;
+    }
+    .logo span { color: #38BDF8; }
+    .logo .arrow { color: #F97316; }
+
+    .nav-links a {
+      color: #94A3B8;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin: 0 0.9rem;
+      letter-spacing: 0.6px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #38BDF8; }
+
+    .print-btn {
+      background: rgba(56, 189, 248, 0.1);
+      color: #38BDF8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 0.45rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: 0.2s;
+    }
+    .print-btn:hover {
+      background: #0284C7;
+      color: #FFFFFF;
+    }
+
+    /* Main Content Layout */
+    .content-wrapper {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem;
+    }
+    .section-tag {
+      color: #F97316;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+    }
+    .main-title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+    .subtext {
+      color: #94A3B8;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 680px;
+      margin-bottom: 2.8rem;
+    }
+
+    /* 3-Column Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #0F1C30;
+      border: 1px solid #1E2E48;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #0284C7;
+    }
+
+    /* Vector Diagram Display Box */
+    .card-graphic {
+      background: #080E1A;
+      border-bottom: 1px solid #1E2E48;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 170px;
+    }
+    .card-graphic svg {
+      width: 100%;
+      height: 130px;
+    }
+
+    /* Card Text Elements */
+    .card-body {
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+    .card-body h3 {
+      font-size: 1.15rem;
+      color: #FFFFFF;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+    .card-body p {
+      color: #94A3B8;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
+    }
+
+    /* Monospace Key Insight / Rule */
+    .takeaway {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.8rem;
+      line-height: 1.45;
+      border-top: 1px solid #1E2E48;
+      padding-top: 0.8rem;
+      color: #38BDF8;
+    }
+    .takeaway.coral { color: #F97316; }
+    .takeaway.green { color: #10B981; }
+
+    /* Call To Action Banner */
+    .cta-box {
+      margin-top: 3.5rem;
+      background: linear-gradient(135deg, #111E33 0%, #172844 100%);
+      border: 1px solid #0284C7;
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .cta-text h4 { font-size: 1.3rem; color: #FFF; margin-bottom: 0.3rem; }
+    .cta-text p { color: #94A3B8; font-size: 0.9rem; }
+    .cta-action a {
+      background: #0284C7;
+      color: #FFF;
+      padding: 0.75rem 1.6rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: inline-block;
+    }
+
+    /* Print / PDF Mode */
+    @media print {
+      body { background: #FFF !important; color: #000 !important; }
+      .top-nav, .cta-box, .print-btn { display: none !important; }
+      .content-wrapper { max-width: 100%; padding: 0; }
+      .card-grid { display: block; }
+      .card { page-break-inside: avoid; margin-bottom: 1.5rem; border: 1px solid #CCC; background: #FFF; }
+      .card-graphic { background: #F8FAFC; }
+      .card-body h3, .card-body p, .takeaway { color: #111 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navigation Header -->
+  <header class="top-nav">
+    <div class="logo">Offer<span>Suite</span><span class="arrow">↗</span></div>
+    <nav class="nav-links">
+      <a href="#framework" class="active">01 THE FRAMEWORK</a>
+      <a href="#pipeline">02 PIPELINE</a>
+      <a href="#interview">03 INTERVIEWS</a>
+      <a href="#negotiation">04 NEGOTIATION</a>
+    </nav>
+    <button class="print-btn" onclick="window.print()">PRINT / PDF</button>
+  </header>
+
+  <!-- Main Container -->
+  <main class="content-wrapper">
+    <section id="framework">
+      <span class="section-tag">Section 01 • Career Operating System</span>
+      <h1 class="main-title">Three frameworks, and the math behind them.</h1>
+      <p class="subtext">
+        Most candidates fail because they treat job hunting like a lottery instead of an automated pipeline. 
+        These are the exact three visual models top earners use to control recruiter leverage.
+      </p>
+
+      <!-- 3-Column Card Layout -->
+      <div class="card-grid">
+
+        <!-- Card 1: The Pipeline Drop-off -->
+        <article class="card">
+          <div class="card-graphic">
+            <svg viewBox="0 0 300 120">
+              <!-- Funnel steps -->
+              <rect x="20" y="20" width="260" height="20" rx="4" fill="#1E2E48"/>
+              <text x="30" y="34" fill="#94A3B8" font-size="9" font-family="monospace">100 APPLIED (COLD)</text>
+              <rect x="55" y="50" width="190" height="20" rx="4" fill="#0284C7"/>
+              <text x="65" y="64" fill="#FFFFFF" font-size="9" font-family="monospace">18 RECRUITER SCREENS</text>
+              <rect x="90" y="80" width="120" height="20" rx="4" fill="#F97316"/>
+              <text x="100" y="94" fill="#FFFFFF" font-size="9" font-family="monospace">4 FINAL OFFERS</text>
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3>The Funnel Conversion Model</h3>
+            <p>Blindly sending 200 resumes without measuring your drop-off rates leaves you guessing. Track your ratio from application to screening to isolate your weak points instantly.</p>
+            <div class="takeaway">Rule: If screening conversion is below 15%, the resume is broken. Not your experience.</div>
+          </div>
+        </article>
+
+        <!-- Card 2: The 48-Hour Trigger -->
+        <article class="card">
+          <div class="card-graphic">
+            <svg viewBox="0 0 300 120">
+              <!-- Timeline Wave -->
+              <path d="M 20 60 Q 80 10 150 60 T 280 60" fill="none" stroke="#38BDF8" stroke-width="3"/>
+              <!-- Point 1: Applied -->
+              <circle cx="50" cy="35" r="5" fill="#94A3B8"/>
+              <text x="30" y="20" fill="#94A3B8" font-size="8" font-family="monospace">DAY 0: APPLIED</text>
+              <!-- Point 2: Trigger Alert -->
+              <circle cx="150" cy="60" r="6" fill="#F97316"/>
+              <text x="120" y="80" fill="#F97316" font-size="9" font-family="monospace">DAY 3: TRIGGER</text>
+              <!-- Point 3: Follow Up Sent -->
+              <circle cx="250" cy="60" r="5" fill="#10B981"/>
+              <text x="215" y="45" fill="#10B981" font-size="8" font-family="monospace">SENT FOLLOW-UP</text>
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3>The 48-Hour Momentum Trigger</h3>
+            <p>Recruiters forget cold applicants within 72 hours. An automated follow-up prompt ensures your profile returns to the top of their inbox before competitor interviews get scheduled.</p>
+            <div class="takeaway coral">Prompt: Column E auto-flags follow-up timing to protect your conversion momentum.</div>
+          </div>
+        </article>
+
+        <!-- Card 3: The Offer Spread Band -->
+        <article class="card">
+          <div class="card-graphic">
+            <svg viewBox="0 0 300 120">
+              <!-- Negotiation Spread -->
+              <line x1="30" y1="60" x2="270" y2="60" stroke="#1E2E48" stroke-width="4"/>
+              <!-- Range Box -->
+              <rect x="90" y="40" width="120" height="40" rx="6" fill="rgba(2, 132, 199, 0.2)" stroke="#0284C7"/>
+              <circle cx="90" cy="60" r="5" fill="#94A3B8"/>
+              <text x="60" y="95" fill="#94A3B8" font-size="8" font-family="monospace">$85K BASELINE</text>
+              <circle cx="210" cy="60" r="6" fill="#10B981"/>
+              <text x="180" y="30" fill="#10B981" font-size="9" font-family="monospace">$115K CEILING</text>
+            </svg>
+          </div>
+          <div class="card-body">
+            <h3>The Compensation Ceiling Spread</h3>
+            <p>Negotiating without clear market brackets leaves thousands on the table. Map your walkaway number and ceiling before your first screening call.</p>
+            <div class="takeaway green">Formula: Never state a single number. Anchor to your top-band range first.</div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Lead Capture / Upsell Footer Banner -->
+      <div class="cta-box">
+        <div class="cta-text">
+          <h4>Want the automated spreadsheet behind this playbook?</h4>
+          <p>Download the free 1-page OfferSuite™ pipeline tracker with pre-built formulas.</p>
+        </div>
+        <div class="cta-action">
+          <a href="#">Get Free Tracker ($0) →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
